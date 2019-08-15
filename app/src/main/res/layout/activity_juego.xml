@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/categoria_tx"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+
+            android:layout_weight="3.8"
+            android:padding="5dp"
+            android:text="CATEGORIA"
+            android:textColor="@android:color/white"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_check" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_check" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_check" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="300dp"
+        android:background="#3BF143"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_base"
+            android:padding="30dp"
+            android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
+            android:textColor="@android:color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_base"
+            android:padding="15dp"
+            android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
+            android:textColor="@android:color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_base"
+            android:padding="15dp"
+            android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
+            android:textColor="@android:color/black"
+            android:textSize="15dp" />
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_base"
+            android:padding="15dp"
+            android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
+            android:textColor="@android:color/black"
+            android:textSize="15dp" />
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dialog_base"
+            android:padding="15dp"
+            android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
+            android:textColor="@android:color/black"
+            android:textSize="15dp" />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
