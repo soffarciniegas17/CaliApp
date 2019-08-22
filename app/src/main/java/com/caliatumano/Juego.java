@@ -149,7 +149,7 @@ public class Juego extends AppCompatActivity {
         switch (pregunta) {
             case 0:
                 correctas[0] = 1;
-                resp[0] = "Andres Caiceo y Luis Ospina";
+                resp[0] = "Andres Caicedo y Luis Ospina";
                 resp[1] = "Luis Ospina y Carlos Mayolo";
                 resp[2] = "Diego León Giraldo y Patricia Restrepo";
                 resp[3] = "Fernando velez y Carlos Mayolo";
