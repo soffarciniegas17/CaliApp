@@ -1,8 +1,13 @@
 package com.caliatumano;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -13,7 +18,11 @@ public class Juego extends AppCompatActivity {
     TextView textCatego = null;
     int catego_id = 0;
     int position = 0;
-    TextView resp1, resp2, resp3, resp4;
+    TextView resp1, resp2, resp3, resp4, titulo_resp, desc_resp;
+    ImageView image;
+    Button aceptar;
+    int correctas[] = new int[8];
+    Dialog dialo_resp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,15 @@ public class Juego extends AppCompatActivity {
             }
 
         }
+
+        dialo_resp = new Dialog(this);
+        dialo_resp.setContentView(R.layout.dialog);
+        dialo_resp.setCancelable(false);
+        titulo_resp = dialo_resp.findViewById(R.id.txt_main);
+        desc_resp = dialo_resp.findViewById(R.id.txt_desc);
+        aceptar = dialo_resp.findViewById(R.id.btn_main);
+        image = dialo_resp.findViewById(R.id.img_main);
+
 
     }
 
@@ -122,52 +140,60 @@ public class Juego extends AppCompatActivity {
         String resp[] = new String[4];
         switch (pregunta) {
             case 0:
+                correctas[0] = 1;
                 resp[0] = "Andres Caiceo y Luis Ospina";
                 resp[1] = "Luis Ospina y Carlos Mayolo";
                 resp[2] = "Diego León Giraldo y Patricia Restrepo";
                 resp[3] = "Fernando velez y Carlos Mayolo";
                 break;
             case 1:
+                correctas[1] = 2;
                 resp[0] = "La tragedia de Efráin";
                 resp[1] = "La muerte de Maria";
                 resp[2] = "El idilio entre Maria y Efráin";
                 resp[3] = "El viaje de Efrain";
                 break;
             case 2:
+                correctas[2] = 3;
                 resp[0] = "Jore Holguín Mallarino";
                 resp[1] = "Andrés Pastrana";
                 resp[2] = "Álvaro Uribe Velez";
                 resp[3] = "Gustavo Rojas Pinilla";
                 break;
             case 3:
+                correctas[3] = 3;
                 resp[0] = "1834";
                 resp[1] = "1821";
                 resp[2] = "1991";
                 resp[3] = "1911";
                 break;
             case 4:
+                correctas[4] = 0;
                 resp[0] = "La explosión de 6 camiones militares";
                 resp[1] = "La masacre estudiantil";
                 resp[2] = "Las elecciones de 1970";
                 resp[3] = "Masacre de las bananeras";
                 break;
             case 5:
+                correctas[5] = 1;
                 resp[0] = "Realizar un homenaje a la música Colombiana";
                 resp[1] = "Impulsar la cultura del pacifico colombiano trayendo su cultura, sus platos y su música";
                 resp[2] = "Incentivar el turismo colombiano";
                 resp[3] = "Para realizar una introducción a la cultura pacifica";
                 break;
             case 6:
-                resp[0] = "Realizar un homenaje a la música Colombiana";
-                resp[1] = "Impulsar la cultura del pacifico colombiano trayendo su cultura, sus platos y su música";
-                resp[2] = "Incentivar el turismo colombiano";
-                resp[3] = "Para realizar una introducción a la cultura pacifica";
+                correctas[6] = 2;
+                resp[0] = "San Fernando";
+                resp[1] = "Los Farallones";
+                resp[2] = "San Antonio";
+                resp[3] = "Parque del gato";
                 break;
             case 7:
-                resp[0] = "Realizar un homenaje a la música Colombiana";
-                resp[1] = "Impulsar la cultura del pacifico colombiano trayendo su cultura, sus platos y su música";
-                resp[2] = "Incentivar el turismo colombiano";
-                resp[3] = "Para realizar una introducción a la cultura pacifica";
+                correctas[7] = 3;
+                resp[0] = "El niño Jesús";
+                resp[1] = "El viacrusis";
+                resp[2] = "Maria Magdalena";
+                resp[3] = "Cristo de la caña";
                 break;
             default:
 
@@ -180,18 +206,66 @@ public class Juego extends AppCompatActivity {
         switch (catego_id) {
             case 0:
                 if (position == 1) {
-
+                    preguntaCorrecta((correctas[0] == Integer.parseInt(view.getTag().toString())));
                 } else {
+                    preguntaCorrecta((correctas[1] == Integer.parseInt(view.getTag().toString())));
                     position++;
                 }
                 break;
             case 1:
+                if (position == 1) {
+                    preguntaCorrecta((correctas[2] == Integer.parseInt(view.getTag().toString())));
+                } else {
+                    preguntaCorrecta((correctas[3] == Integer.parseInt(view.getTag().toString())));
+                    position++;
+                }
                 break;
             case 2:
+                if (position == 1) {
+                    preguntaCorrecta((correctas[4] == Integer.parseInt(view.getTag().toString())));
+                } else {
+                    preguntaCorrecta((correctas[5] == Integer.parseInt(view.getTag().toString())));
+                    position++;
+                }
                 break;
             case 3:
+                if (position == 1) {
+                    preguntaCorrecta((correctas[6] == Integer.parseInt(view.getTag().toString())));
+
+                } else {
+                    preguntaCorrecta((correctas[7] == Integer.parseInt(view.getTag().toString())));
+                    position++;
+                }
                 break;
         }
     }
+
+    public void preguntaCorrecta(boolean respuesta) {
+
+        if (respuesta) {
+            titulo_resp.setText("Correcto");
+            titulo_resp.setTextColor(Color.parseColor("#4CAF50"));
+            image.setBackgroundResource(R.drawable.choladin);
+            desc_resp.setText("Es correcto la respuesta");
+        } else {
+            titulo_resp.setText("Incorrecto");
+            titulo_resp.setTextColor(Color.parseColor("#F44336"));
+
+            desc_resp.setText("Es incorrecta la respuesta");
+        }
+
+        dialo_resp.show();
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (position == 2) {
+                    //  Intent intent = new Intent(getApplicationContext());
+                    // intent
+                }
+            }
+        });
+    }
+
 
 }

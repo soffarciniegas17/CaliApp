@@ -28,16 +28,19 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/inte_1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_check" />
 
             <ImageView
+                android:id="@+id/inte_2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_check" />
 
             <ImageView
+                android:id="@+id/inte_3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_check" />
@@ -47,6 +50,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/barra"
         android:layout_width="300dp"
         android:layout_height="14dp"
         android:background="#3BF143" />
@@ -70,6 +74,7 @@
             android:textSize="18dp" />
 
         <TextView
+            android:tag="0"
             android:onClick="respuesta"
             android:id="@+id/resp_1"
             android:layout_width="320dp"
@@ -82,6 +87,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:tag="1"
             android:id="@+id/resp_2"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
@@ -93,6 +99,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:tag="2"
             android:id="@+id/resp_3"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
@@ -104,6 +111,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:tag="3"
             android:id="@+id/resp_4"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
