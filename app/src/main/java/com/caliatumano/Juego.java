@@ -3,6 +3,7 @@ package com.caliatumano;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,12 +18,14 @@ public class Juego extends AppCompatActivity {
     String categoria = "";
     TextView textCatego = null;
     int catego_id = 0;
-    int position = 0;
+    int position = 0, buenas, malas;
     TextView resp1, resp2, resp3, resp4, titulo_resp, desc_resp;
     ImageView image;
     Button aceptar;
     int correctas[] = new int[8];
     Dialog dialo_resp;
+    TextView textos[] = {resp1, resp2, resp3, resp4};
+    TextView pregunta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +42,13 @@ public class Juego extends AppCompatActivity {
         categoria = extras.getString("categoria");
         textCatego.setText(categoria);
 
-        TextView pregunta = findViewById(R.id.pregunta);
+        pregunta = findViewById(R.id.pregunta);
         pregunta.setText(getPreguntas(1, extras.getInt("id_categoria")));
         position = 1;
         catego_id = extras.getInt("id_categoria");
+
         TextView textos[] = {resp1, resp2, resp3, resp4};
+
         for (int i = 0; i < textos.length; i++) {
             if (extras.getInt("id_categoria") == 0) {
                 if (position == 1) {
@@ -76,11 +81,14 @@ public class Juego extends AppCompatActivity {
         dialo_resp = new Dialog(this);
         dialo_resp.setContentView(R.layout.dialog);
         dialo_resp.setCancelable(false);
+        dialo_resp.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         titulo_resp = dialo_resp.findViewById(R.id.txt_main);
         desc_resp = dialo_resp.findViewById(R.id.txt_desc);
         aceptar = dialo_resp.findViewById(R.id.btn_main);
         image = dialo_resp.findViewById(R.id.img_main);
 
+        buenas = 0;
+        malas = 0;
 
     }
 
@@ -209,7 +217,7 @@ public class Juego extends AppCompatActivity {
                     preguntaCorrecta((correctas[0] == Integer.parseInt(view.getTag().toString())));
                 } else {
                     preguntaCorrecta((correctas[1] == Integer.parseInt(view.getTag().toString())));
-                    position++;
+
                 }
                 break;
             case 1:
@@ -217,7 +225,7 @@ public class Juego extends AppCompatActivity {
                     preguntaCorrecta((correctas[2] == Integer.parseInt(view.getTag().toString())));
                 } else {
                     preguntaCorrecta((correctas[3] == Integer.parseInt(view.getTag().toString())));
-                    position++;
+
                 }
                 break;
             case 2:
@@ -225,7 +233,7 @@ public class Juego extends AppCompatActivity {
                     preguntaCorrecta((correctas[4] == Integer.parseInt(view.getTag().toString())));
                 } else {
                     preguntaCorrecta((correctas[5] == Integer.parseInt(view.getTag().toString())));
-                    position++;
+
                 }
                 break;
             case 3:
@@ -234,7 +242,7 @@ public class Juego extends AppCompatActivity {
 
                 } else {
                     preguntaCorrecta((correctas[7] == Integer.parseInt(view.getTag().toString())));
-                    position++;
+
                 }
                 break;
         }
@@ -243,11 +251,14 @@ public class Juego extends AppCompatActivity {
     public void preguntaCorrecta(boolean respuesta) {
 
         if (respuesta) {
+            buenas++;
             titulo_resp.setText("Correcto");
             titulo_resp.setTextColor(Color.parseColor("#4CAF50"));
-            image.setBackgroundResource(R.drawable.choladin);
+            image.setBackgroundResource(R.drawable.ic_buena);
             desc_resp.setText("Es correcto la respuesta");
         } else {
+            malas++;
+            image.setBackgroundResource(R.drawable.ic_mala);
             titulo_resp.setText("Incorrecto");
             titulo_resp.setTextColor(Color.parseColor("#F44336"));
 
@@ -259,13 +270,58 @@ public class Juego extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position == 2) {
-                    //  Intent intent = new Intent(getApplicationContext());
-                    // intent
+                if (position == 1) {
+
+                    dialo_resp.dismiss();
+                    position++;
+                    set(position);
+                }else{
+                    dialo_resp.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), FinalJuego.class);
+                    intent.putExtra("preguntas", 2);
+                    intent.putExtra("buenas", "" + buenas);
+                    intent.putExtra("malas", "" + malas);
+                    startActivity(intent);
                 }
+
             }
         });
     }
 
+
+    public void set(int position) {
+        TextView textos[] = {resp1, resp2, resp3, resp4};
+        pregunta.setText(getPreguntas(position, catego_id));
+
+        for (int i = 0; i < textos.length; i++) {
+            if (catego_id == 0) {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(0)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(1)[i]);
+                }
+            } else if (catego_id == 1) {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(2)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(3)[i]);
+                }
+            } else if (catego_id == 2) {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(4)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(5)[i]);
+                }
+            } else {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(6)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(7)[i]);
+                }
+            }
+
+        }
+
+    }
 
 }

@@ -74,6 +74,7 @@
             android:textSize="18dp" />
 
         <TextView
+
             android:tag="0"
             android:onClick="respuesta"
             android:id="@+id/resp_1"
@@ -87,6 +88,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:onClick="respuesta"
             android:tag="1"
             android:id="@+id/resp_2"
             android:layout_width="320dp"
@@ -99,6 +101,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:onClick="respuesta"
             android:tag="2"
             android:id="@+id/resp_3"
             android:layout_width="320dp"
@@ -111,6 +114,7 @@
             android:textSize="15dp" />
 
         <TextView
+            android:onClick="respuesta"
             android:tag="3"
             android:id="@+id/resp_4"
             android:layout_width="320dp"

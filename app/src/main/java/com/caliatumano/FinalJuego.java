@@ -18,6 +18,11 @@ public class FinalJuego extends AppCompatActivity {
         extras = getIntent().getExtras();
 
         txt_titulo = findViewById(R.id.txt_main);
+        txt_buenas = findViewById(R.id.txt_buena);
+        txt_malas = findViewById(R.id.txt_mala);
+
+        txt_buenas.setText(extras.getString("buenas"));
+        txt_malas.setText(extras.getString("malas"));
     }
 
 
