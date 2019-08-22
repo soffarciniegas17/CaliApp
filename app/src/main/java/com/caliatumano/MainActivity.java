@@ -1,8 +1,10 @@
 package com.caliatumano;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
@@ -36,5 +38,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void pasar(View view) {
+        Intent intent = new Intent(this, Menu.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -50,6 +50,7 @@
             android:background="@drawable/edt_base"/>
 
         <Button
+            android:onClick="pasar"
             android:layout_marginTop="15dp"
             android:padding="10dp"
             android:layout_width="match_parent"

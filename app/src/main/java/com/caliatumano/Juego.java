@@ -2,7 +2,10 @@ package com.caliatumano;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Juego extends AppCompatActivity {
 
@@ -10,6 +13,7 @@ public class Juego extends AppCompatActivity {
     TextView textCatego = null;
     int catego_id = 0;
     int position = 0;
+    TextView resp1, resp2, resp3, resp4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +21,48 @@ public class Juego extends AppCompatActivity {
         setContentView(R.layout.activity_juego);
 
         textCatego = findViewById(R.id.categoria_tx);
+        resp1 = findViewById(R.id.resp_1);
+        resp2 = findViewById(R.id.resp_2);
+        resp3 = findViewById(R.id.resp_3);
+        resp4 = findViewById(R.id.resp_4);
 
         Bundle extras = getIntent().getExtras();
         categoria = extras.getString("categoria");
         textCatego.setText(categoria);
+
+        TextView pregunta = findViewById(R.id.pregunta);
+        pregunta.setText(getPreguntas(1, extras.getInt("id_categoria")));
+        position = 1;
+        catego_id = extras.getInt("id_categoria");
+        TextView textos[] = {resp1, resp2, resp3, resp4};
+        for (int i = 0; i < textos.length; i++) {
+            if (extras.getInt("id_categoria") == 0) {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(0)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(1)[i]);
+                }
+            } else if (extras.getInt("id_categoria") == 1) {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(2)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(3)[i]);
+                }
+            } else if (extras.getInt("id_categoria") == 2) {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(4)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(5)[i]);
+                }
+            } else {
+                if (position == 1) {
+                    textos[i].setText(getRespuestas(6)[i]);
+                } else {
+                    textos[i].setText(getRespuestas(7)[i]);
+                }
+            }
+
+        }
 
     }
 
@@ -30,38 +72,126 @@ public class Juego extends AppCompatActivity {
         switch (categoria) {
             case 0:
                 if (position == 1) {
+                    //0
                     pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
                 } else {
-                    pregunta = "";
+                    //1
+                    pregunta = "Maria, es la única novelda de Jorge Isaac, la cúal es considerada una de las obras más destacadas" +
+                            "de la literatura hispanica. ¿De que trata esta novela?";
                 }
 
                 break;
             case 1:
 
                 if (position == 1) {
-                    pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
+                    //2
+                    pregunta = "El 26 de febrero de 1971 ocurrió La Masacre estudiantil más memorada de la historia cuando estudiantes" +
+                            " de Univalle trataron de retorma su campus. '¿Bajo el mandato de quién sucedio este hecho?";
                 } else {
-                    pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
+                    //3
+                    pregunta = "¿En que año Santiago de Cali pasó a ser la capital del (en esa epoca) renaciente Valle del Cauca?";
                 }
                 break;
             case 2:
                 if (position == 1) {
-                    pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
+                    //4
+                    pregunta = "La feria de Cali fue motivada para transformar el dolor de una tregedia en alegría y festividad ¿Qué tragedia condecoro esta festividad?";
                 } else {
-                    pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
+                    //5
+                    pregunta = "El 'Petronio' es una festividad músical reconocida mundialmente que consiste en...";
                 }
                 break;
             case 3:
                 if (position == 1) {
-                    pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
+                    //6
+                    pregunta = "Uno de los barrios más antiguos de Cali resalta en una de las tantas lomas de Cali, es considerada patrimonio de la ciudad" +
+                            "y dentro de él, se encuentra una de las iglesias más antiguas de Colombia.";
                 } else {
-                    pregunta = "¿Quienes fueron los directores del cortometraje 'Oiga vea'?";
+                    //7
+                    pregunta = "La Ermita conserva una de las imagenes con más de tres siglos como Nuestra señora de los Dolores, San Francisco, ect. En " +
+                            " su lateral izquierdo contiene una de las más antiguas imagenes que conserva la iglesia y es una representación vallecaucana.";
                 }
                 break;
 
         }
 
         return pregunta;
+    }
+
+    public String[] getRespuestas(int pregunta) {
+        String resp[] = new String[4];
+        switch (pregunta) {
+            case 0:
+                resp[0] = "Andres Caiceo y Luis Ospina";
+                resp[1] = "Luis Ospina y Carlos Mayolo";
+                resp[2] = "Diego León Giraldo y Patricia Restrepo";
+                resp[3] = "Fernando velez y Carlos Mayolo";
+                break;
+            case 1:
+                resp[0] = "La tragedia de Efráin";
+                resp[1] = "La muerte de Maria";
+                resp[2] = "El idilio entre Maria y Efráin";
+                resp[3] = "El viaje de Efrain";
+                break;
+            case 2:
+                resp[0] = "Jore Holguín Mallarino";
+                resp[1] = "Andrés Pastrana";
+                resp[2] = "Álvaro Uribe Velez";
+                resp[3] = "Gustavo Rojas Pinilla";
+                break;
+            case 3:
+                resp[0] = "1834";
+                resp[1] = "1821";
+                resp[2] = "1991";
+                resp[3] = "1911";
+                break;
+            case 4:
+                resp[0] = "La explosión de 6 camiones militares";
+                resp[1] = "La masacre estudiantil";
+                resp[2] = "Las elecciones de 1970";
+                resp[3] = "Masacre de las bananeras";
+                break;
+            case 5:
+                resp[0] = "Realizar un homenaje a la música Colombiana";
+                resp[1] = "Impulsar la cultura del pacifico colombiano trayendo su cultura, sus platos y su música";
+                resp[2] = "Incentivar el turismo colombiano";
+                resp[3] = "Para realizar una introducción a la cultura pacifica";
+                break;
+            case 6:
+                resp[0] = "Realizar un homenaje a la música Colombiana";
+                resp[1] = "Impulsar la cultura del pacifico colombiano trayendo su cultura, sus platos y su música";
+                resp[2] = "Incentivar el turismo colombiano";
+                resp[3] = "Para realizar una introducción a la cultura pacifica";
+                break;
+            case 7:
+                resp[0] = "Realizar un homenaje a la música Colombiana";
+                resp[1] = "Impulsar la cultura del pacifico colombiano trayendo su cultura, sus platos y su música";
+                resp[2] = "Incentivar el turismo colombiano";
+                resp[3] = "Para realizar una introducción a la cultura pacifica";
+                break;
+            default:
+
+                break;
+        }
+        return resp;
+    }
+
+    public void respuesta(View view) {
+        switch (catego_id) {
+            case 0:
+                if (position == 1) {
+
+                } else {
+                    position++;
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 
 }

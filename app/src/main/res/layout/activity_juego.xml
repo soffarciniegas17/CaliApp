@@ -15,7 +15,6 @@
             android:id="@+id/categoria_tx"
             android:layout_width="0dp"
             android:layout_height="40dp"
-
             android:layout_weight="3.8"
             android:padding="5dp"
             android:text="CATEGORIA"
@@ -49,9 +48,8 @@
 
     <TextView
         android:layout_width="300dp"
-        android:background="#3BF143"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="14dp"
+        android:background="#3BF143" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,16 +60,19 @@
 
 
         <TextView
+            android:id="@+id/pregunta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_base"
             android:padding="30dp"
-            android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
+            android:text="'CUANDO MURIO SEBASTIAN DE BELALCAZAR?"
             android:textColor="@android:color/black"
             android:textSize="18dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:onClick="respuesta"
+            android:id="@+id/resp_1"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/dialog_base"
@@ -81,7 +82,8 @@
             android:textSize="15dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/resp_2"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/dialog_base"
@@ -90,8 +92,9 @@
             android:textColor="@android:color/black"
             android:textSize="15dp" />
 
-            <TextView
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/resp_3"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/dialog_base"
@@ -100,8 +103,9 @@
             android:textColor="@android:color/black"
             android:textSize="15dp" />
 
-            <TextView
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/resp_4"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/dialog_base"
@@ -109,7 +113,6 @@
             android:text="'CUANDO MUROO SEBASTIAN DE BELALCAAR?"
             android:textColor="@android:color/black"
             android:textSize="15dp" />
-
 
 
     </LinearLayout>

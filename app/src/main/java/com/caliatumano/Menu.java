@@ -1,5 +1,6 @@
 package com.caliatumano;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         gridView = findViewById(R.id.grid_view);
 
-        ArrayList<Categoria> list= new ArrayList<>();
+        final ArrayList<Categoria> list= new ArrayList<>();
         list.add(new Categoria("Arte", R.drawable.catego_arte));
         list.add(new Categoria("Historia", R.drawable.catego_historia));
         list.add(new Categoria("Festividades", R.drawable.catego_festividades));
@@ -32,6 +33,11 @@ public class Menu extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent in = new Intent(getApplicationContext(), Juego.class);
+                in.putExtra("categoria", list.get(position).getNombre());
+                in.putExtra("id_categoria", position);
+                startActivity(in);
+
 
             }
         });
