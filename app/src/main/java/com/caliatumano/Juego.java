@@ -10,22 +10,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.caliatumano.controllers.EncuestaControl;
+import com.caliatumano.models.Pregunta;
+import com.caliatumano.models.Respuesta;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class Juego extends AppCompatActivity {
 
-    String categoria = "";
+    private String categoria = "", nivel = "";
     TextView textCatego = null;
     int catego_id = 0;
     int position = 0, buenas, malas;
     TextView resp1, resp2, resp3, resp4, titulo_resp, desc_resp;
     ImageView image;
     Button aceptar;
-    int correctas[] = new int[8];
+    //int correctas[] = new int[8];
     Dialog dialo_resp;
     TextView textos[] = {resp1, resp2, resp3, resp4};
     TextView pregunta;
+    private Pregunta preguntaModel;
+    private ArrayList<Pregunta> lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +46,101 @@ public class Juego extends AppCompatActivity {
         resp2 = findViewById(R.id.resp_2);
         resp3 = findViewById(R.id.resp_3);
         resp4 = findViewById(R.id.resp_4);
+        pregunta = findViewById(R.id.pregunta);
 
         Bundle extras = getIntent().getExtras();
         categoria = extras.getString("categoria");
-        textCatego.setText(categoria);
-
-        pregunta = findViewById(R.id.pregunta);
-        pregunta.setText(getPreguntas(1, extras.getInt("id_categoria")));
-        position = 1;
         catego_id = extras.getInt("id_categoria");
+        nivel = extras.getString("nivel");
 
+        textCatego.setText(categoria);
+        lista = new EncuestaControl(this).getEncuesta(1, nivel);
+
+
+        dialo_resp = new Dialog(this);
+        dialo_resp.setContentView(R.layout.dialog);
+        dialo_resp.setCancelable(false);
+        dialo_resp.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        titulo_resp = dialo_resp.findViewById(R.id.txt_main);
+        desc_resp = dialo_resp.findViewById(R.id.txt_desc);
+        aceptar = dialo_resp.findViewById(R.id.btn_main);
+        image = dialo_resp.findViewById(R.id.img_main);
+
+        setEncuesta(0);
+        position = 0;
+    }
+
+
+    public void setEncuesta(int position) {
         TextView textos[] = {resp1, resp2, resp3, resp4};
+        preguntaModel = lista.get(position);
+        pregunta.setText(preguntaModel.getPregunta());
+
+        for (int i = 0; i < preguntaModel.getListRespuesta().size(); i++) {
+            Respuesta respuesta = preguntaModel.getListRespuesta().get(i);
+            textos[i].setText(respuesta.getRespuesta());
+            textos[i].setTag(respuesta.getId());
+        }
+    }
+
+    public void respuesta(View v) {
+        for (int i = 0; i < preguntaModel.getListRespuesta().size(); i++) {
+            Respuesta respuesta = preguntaModel.getListRespuesta().get(i);
+
+            if (v.getTag().toString().equalsIgnoreCase(respuesta.getId())) {
+                setRespuesta(respuesta.getBandera()==1);
+            }
+
+        }
+    }
+
+    public void setRespuesta(boolean bandera) {
+        position++;
+        if (bandera) {
+            buenas++;
+            titulo_resp.setText("Correcto");
+            titulo_resp.setTextColor(Color.parseColor("#4CAF50"));
+            image.setBackgroundResource(R.drawable.ic_buena);
+            desc_resp.setText("Es correcto la respuesta");
+        } else {
+            malas++;
+            image.setBackgroundResource(R.drawable.ic_mala);
+            titulo_resp.setText("Incorrecto");
+            titulo_resp.setTextColor(Color.parseColor("#F44336"));
+
+            desc_resp.setText("Es incorrecta la respuesta");
+        }
+
+        dialo_resp.show();
+
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (position < lista.size()) {
+                    dialo_resp.dismiss();
+                    setEncuesta(position);
+                } else {
+                    dialo_resp.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), FinalJuego.class);
+                    intent.putExtra("preguntas", position+1);
+                    intent.putExtra("buenas", "" + buenas);
+                    intent.putExtra("malas", "" + malas);
+                    startActivity(intent);
+                }
+            }
+        });
+
+    }
+
+
+  /*  public void viejo() {
+        pregunta = findViewById(R.id.pregunta);
+        //    pregunta.setText(getPreguntas(1, extras.getInt("id_categoria")));
+        position = 1;
+        //    catego_id = extras.getInt("id_categoria");
+
+        TextView[] textos = {resp1, resp2, resp3, resp4};
 
         for (int i = 0; i < textos.length; i++) {
             if (extras.getInt("id_categoria") == 0) {
@@ -78,18 +171,9 @@ public class Juego extends AppCompatActivity {
 
         }
 
-        dialo_resp = new Dialog(this);
-        dialo_resp.setContentView(R.layout.dialog);
-        dialo_resp.setCancelable(false);
-        dialo_resp.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        titulo_resp = dialo_resp.findViewById(R.id.txt_main);
-        desc_resp = dialo_resp.findViewById(R.id.txt_desc);
-        aceptar = dialo_resp.findViewById(R.id.btn_main);
-        image = dialo_resp.findViewById(R.id.img_main);
 
         buenas = 0;
         malas = 0;
-
     }
 
 
@@ -275,7 +359,7 @@ public class Juego extends AppCompatActivity {
                     dialo_resp.dismiss();
                     position++;
                     set(position);
-                }else{
+                } else {
                     dialo_resp.dismiss();
                     Intent intent = new Intent(getApplicationContext(), FinalJuego.class);
                     intent.putExtra("preguntas", 2);
@@ -323,5 +407,5 @@ public class Juego extends AppCompatActivity {
         }
 
     }
-
+*/
 }

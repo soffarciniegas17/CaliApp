@@ -1,15 +1,15 @@
 package com.caliatumano.adapters;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.caliatumano.Categoria;
+import com.caliatumano.models.Categoria;
 import com.caliatumano.R;
 
 import java.util.ArrayList;
@@ -50,6 +50,7 @@ public class AdapterCatego extends BaseAdapter {
         TextView categoria = convertView.findViewById(R.id.categoria);
 
         Categoria model = list.get(position);
+
         portada.setBackgroundResource(model.getImage());
         categoria.setText(model.getNombre());
 
